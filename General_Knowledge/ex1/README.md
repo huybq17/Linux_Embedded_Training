@@ -1,0 +1,2 @@
+*Create a static library.*
+
