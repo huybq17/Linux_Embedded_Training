@@ -6,4 +6,5 @@ all:
 	gcc -o ex3 main.c
 
 clean:
-	rm -rf ex3 *.txt
+	rm -rf ex3 error.log
+	find . -maxdepth 1 -type f -name "*.txt" -delete

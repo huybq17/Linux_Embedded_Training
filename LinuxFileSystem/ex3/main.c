@@ -33,7 +33,8 @@ int main(int argc, char const *argv[]) {
     const char *filename = argv[1];
     const char *data = argv[2];
 
-    if (argc < 3) {
+    // ./myexe file name data
+    if (argc != 3) {
         fprintf(stderr, "Usage: %s <filename> <data>\n", argv[0]);
         log_error("Invalid arguments!");
         return 0;
