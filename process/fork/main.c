@@ -18,7 +18,7 @@ int main(int argc, char const *argv[]) {
         }
         else {
             signal(SIGCHLD, signal_handle);
-            printf("I'm Parent, Parent PID: %d\n", getpid());
+            printf("I'm Parent, My Child PID: %d\n", child_pid);
             while(1);
         }
     } else {
