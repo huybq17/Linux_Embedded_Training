@@ -4,7 +4,9 @@
 /*************************************************************************
  * Definitions
  ************************************************************************/
-#define NUMBER_PROGRAM 4U
+// Number of argurments for using a new program
+#define ARG_COUNT       10U
+#define NUMBER_PROGRAM  4U
 
 typedef enum {
     UNKNOWN,

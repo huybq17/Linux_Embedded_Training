@@ -9,7 +9,7 @@ BIN_DIR := $(CUR_DIR)/bin
 OBJ_DIR := $(CUR_DIR)/obj
 
 CC := gcc
-C_FLAGS := -c -fPIC -o
+C_FLAGS := -c -fPIC -O2 -o
 
 all: $(BIN_DIR) $(OBJ_DIR)/main.o $(OBJ_DIR)/new_program.o
 	$(CC) -o $(BIN_DIR)/$(PRJ_NAME) $(OBJ_DIR)/main.o $(OBJ_DIR)/new_program.o -I $(INC_DIR)
@@ -18,10 +18,12 @@ all: $(BIN_DIR) $(OBJ_DIR)/main.o $(OBJ_DIR)/new_program.o
 $(BIN_DIR):
 	@mkdir -p $(BIN_DIR)
 
+# Rule for compiling .c files from current directory
 $(OBJ_DIR)/%.o: %.c $(INC_DIR)
 	@mkdir -p $(shell dirname $@)
 	$(CC) $(C_FLAGS) $@ $< -I $(INC_DIR)
 
+# Rule for compiling .c files from src directory
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)
 	@mkdir -p $(shell dirname $@)
 	$(CC) $(C_FLAGS) $@ $< -I $(INC_DIR)

@@ -21,11 +21,19 @@ int main() {
     }
 
     if (0 == child_pid) {
-        printf("I'm Child process with PID %d\n", getpid());
+        printf("I'm Child process with PID: %d\n", getpid());
+        printf("I'm starting the process of ending\n");
+        sleep(2);
+        exit(7);
     } else {
-        sleep(1);
         printf("Parent process...\n");
-        wait(&wstatus);
+        waitpid(child_pid, &wstatus, 0);
+
+        if (WIFEXITED(wstatus)) {
+            printf("Child exited normally with code %d.\n", WEXITSTATUS(wstatus));
+        } else {
+            printf("Child did not exit normally.\n");
+        }
     }
 
     return 0;

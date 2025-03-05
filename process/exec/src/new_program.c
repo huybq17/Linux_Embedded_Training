@@ -40,7 +40,7 @@ pid_t replace_process(const char *program, char *const *args) {
 
 char **check_value(char const *args) {
     new_program_t new_pro = UNKNOWN;
-    static char *command[] = {};
+    static char *command[ARG_COUNT] = {0};
 
     char *args_list[] = {"ls", "-l", NULL};
     char *args_date[] = {"date", "--utc", NULL};
