@@ -9,13 +9,13 @@ int main() {
     fd1 = open("input2.txt", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if (fd1 == -1) {
         perror("Error opening file");
-        return 1;
+        return -1;
     }
 
     fd3 = open("input2.txt", O_RDWR); 
     if (fd3 == -1) {
         perror("Error opening file");
-        return 1;
+        return -1;
     }
 
     write(fd1, data1, 6); 
