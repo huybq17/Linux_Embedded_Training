@@ -19,8 +19,6 @@ int main() {
     }
 
     write(fd1, data1, 6); 
-    // write(fd2, "world", 6); // fd2 is not initialized 
-    // lseek(fd2, 0, SEEK_SET); // fd2 is not initialized
     write(fd1, data3, 6); 
     write(fd3, "Gidday", 6);
 

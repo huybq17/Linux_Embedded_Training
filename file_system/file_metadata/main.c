@@ -62,11 +62,11 @@ int main(int argc, char const *argv[]) {
     
     printf("File Information:\n");
     printf("File Name: %s\n", filename);
-    printf("File Type: %s\n", S_ISREG(fileStat.st_mode) ? "Regular file" :
-                                 S_ISDIR(fileStat.st_mode) ? "Directory" :
-                                 S_ISCHR(fileStat.st_mode) ? "Character device" :
-                                 S_ISBLK(fileStat.st_mode) ? "Block device" :
-                                 S_ISLNK(fileStat.st_mode) ? "Symbolic Link" : "Other");
+    printf("File Type: %s\n", S_ISREG(fileStat.st_mode) ? "Regular file" :          \
+                              S_ISDIR(fileStat.st_mode) ? "Directory" :             \
+                              S_ISCHR(fileStat.st_mode) ? "Character device" :      \
+                              S_ISBLK(fileStat.st_mode) ? "Block device" :          \
+                              S_ISLNK(fileStat.st_mode) ? "Symbolic Link" : "Other");
     printf("Owner UID: %d\n", fileStat.st_uid);
     printf("Group GID: %d\n", fileStat.st_gid);
     printf("Number of Hard Links: %ld\n", fileStat.st_nlink);

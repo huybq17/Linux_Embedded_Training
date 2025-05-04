@@ -1,107 +1,51 @@
-# Assignment of Threads in Linux
+# Thread Programming in Linux
 
 ## Introduction
-This document provides an overview of thread assignment in Linux, covering the fundamental concepts, system calls, and best practices for working with threads in a Linux environment.
+This folder contains a series of exercises designed to provide hands-on experience with thread programming in Linux. Thread programming is a key concept in concurrent programming, enabling multiple threads to execute within the same process. These exercises focus on creating, managing, and synchronizing threads using the `pthread` library, as well as exploring advanced concepts like thread pools and scheduling.
 
-## What is a Thread?
-A thread is a lightweight process that shares the same address space as its parent process. Threads enable parallel execution within a process, improving efficiency and performance.
+## Objectives
+- Understand the fundamentals of thread programming in Linux.
+- Learn how to create and manage threads using the `pthread` library.
+- Explore thread synchronization techniques such as mutexes and semaphores.
+- Implement real-world applications using multi-threading to improve performance and efficiency.
 
-## Creating Threads in Linux
-In Linux, threads can be created using the `pthread` library. The following command ensures the necessary library is installed:
+## Exercises Overview
+The folder is organized into subdirectories, each focusing on a specific threading concept or application:
 
-```sh
-sudo apt-get install libpthread-stubs0-dev
-```
+### 1. `basic_threading`
+- Demonstrates how to create and join threads using the `pthread` library.
+- Covers basic thread lifecycle management.
 
-### Example: Creating a Thread
-The following C program demonstrates how to create a thread using `pthread_create`:
+### 2. `thread_synchronization`
+- Explores synchronization techniques like mutexes.
+- Prevents race conditions when accessing shared resources.
 
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
+### 3. `thread_pool`
+- Implements a thread pool to handle multiple tasks efficiently.
+- Demonstrates resource allocation and task scheduling.
 
-void *thread_function(void *arg) {
-    printf("Hello from thread!\n");
-    return NULL;
-}
+### 4. `real_time_processing`
+- Processes real-time data streams using concurrent threads.
+- Uses mutexes for controlled access to shared data.
 
-int main() {
-    pthread_t thread;
-    if (pthread_create(&thread, NULL, thread_function, NULL)) {
-        fprintf(stderr, "Error creating thread\n");
-        return 1;
-    }
-    pthread_join(thread, NULL);
-    return 0;
-}
-```
+## How to Run the Exercises
+Each subdirectory contains a Makefile for the exercises. Follow these steps to compile and run the programs:
 
-### Explanation
-- `pthread_create()` initializes a new thread.
-- `pthread_join()` ensures the main thread waits for the new thread to finish execution.
-
-## Thread Synchronization
-Synchronization is crucial to prevent race conditions when multiple threads access shared resources. Common techniques include:
-
-### 1. Mutex (Mutual Exclusion)
-```c
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-
-pthread_mutex_lock(&mutex);
-// Critical section
-pthread_mutex_unlock(&mutex);
-```
-
-### 2. Semaphores
-```c
-#include <semaphore.h>
-sem_t sem;
-sem_init(&sem, 0, 1);
-sem_wait(&sem);
-// Critical section
-sem_post(&sem);
-```
-
-## Thread Scheduling
-Linux uses different scheduling policies, which can be set using `pthread_setschedparam()`.
-- `SCHED_FIFO`: First in, first out scheduling.
-- `SCHED_RR`: Round-robin scheduling.
-- `SCHED_OTHER`: Default time-sharing policy.
-
-## Thread Termination
-A thread can be terminated using:
-```c
-pthread_exit(NULL);
-```
-Or by returning from the thread function.
-
-## User Projects on Threading
-Below are some projects demonstrating the use of threads in Linux:
-
-### 1. Multi-threaded File Processing
-- Reads multiple files in parallel using separate threads.
-- Uses mutex locks to prevent concurrent write conflicts.
-- Improves file read and write efficiency.
-
-### 2. Web Server with Thread Pool
-- Implements a lightweight web server handling multiple requests simultaneously.
-- Uses a thread pool to efficiently allocate resources for incoming requests.
-- Demonstrates the use of thread synchronization to manage shared resources.
-
-### 3. Parallel Matrix Multiplication
-- Divides matrix multiplication tasks among multiple threads.
-- Uses thread synchronization to merge computed results.
-- Improves computational performance on large matrices.
-
-### 4. Real-time Data Processing
-- Processes streaming data using concurrent threads.
-- Uses semaphores for controlled data access.
-- Ensures real-time data processing without bottlenecks.
-
-## Conclusion
-Threading in Linux is a powerful tool for concurrent programming. By using `pthread`, developers can create, manage, and synchronize threads efficiently, improving performance in multi-threaded applications.
+1. Navigate to the desired subdirectory:
+   ```sh
+   > cd <subdirectory_name>
+   ```
+2. Compile the program:
+   ```sh
+   > make
+   ```
+3. Run the program:
+   ```sh
+   > ./program
+   ```
 
 ## References
 - [pthread Library Documentation](https://man7.org/linux/man-pages/man7/pthreads.7.html)
+- [Linux Thread Programming](https://man7.org/linux/man-pages/man3/pthread_create.3.html)
+- [POSIX Threads Programming](https://computing.llnl.gov/tutorials/pthreads/)
 

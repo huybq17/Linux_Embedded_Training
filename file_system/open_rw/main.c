@@ -19,8 +19,6 @@ int main() {
     // Write data to the beginning of the file
     write(fd, data, strlen(data));
 
-    // CLose the file
     close(fd);
-
     return 0;
 }

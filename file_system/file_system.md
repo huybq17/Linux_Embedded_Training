@@ -1,75 +1,48 @@
-# File System in Linux with C
+# File System Programming in Linux
 
-## 1. What is a File System?
+## Introduction
+This folder contains a series of exercises designed to provide hands-on experience with file system programming in Linux. The file system is a critical component of any operating system, providing a structured way to store, organize, and access data. In Linux, everything is treated as a file, including hardware devices, directories, and regular files. These exercises focus on understanding file system concepts and implementing file and directory operations using C.
 
-A File System is a method of organizing and storing data on storage devices such as hard drives, SSDs, or USB drives. It provides an interface for users and programs to access, read, write, and manage data.
+## Objectives
+- Understand the fundamentals of file systems in Linux.
+- Learn how to create, read, write, and delete files using C.
+- Explore directory operations such as listing contents and creating directories.
+- Work with symbolic links, inodes, and file metadata.
+- Gain familiarity with common Linux file systems like `ext4`, `xfs`, and `btrfs`.
 
-In Linux, everything is treated as a file, including hardware devices, directories, and regular files.
+## Exercises Overview
+The folder is organized into subdirectories, each focusing on a specific concept related to file system programming:
 
----
+### 1. `file_system`
+- Demonstrates how to create, write to, and read from files using C.
+- Covers basic file I/O operations such as `open`, `read`, `write`, and `close`.
 
-## 2. Types of Files in Linux
+### 2. `check`
+- Explores how to check the operations like write, read a file.
 
-Linux categorizes files into the following types:
-- **Regular file**: Standard files (e.g., text files, binary files).
-- **Directory**: Folders containing files or subdirectories.
-- **Special file**: Device files (e.g., `/dev/sda`).
-- **Symbolic link**: Shortcut files (symlinks).
-- **Socket**: Files used for inter-process communication.
-- **FIFO (Named Pipe)**: Files used for queue-based inter-process communication.
+### 3. `file_metadata`
+- Explains how to retrieve file metadata using the `stat` function.
+- Covers file size, permissions, timestamps, and inode information.
 
----
+### Running the Programs
+1. Navigate to the desired subdirectory:
+   ```sh
+   cd <subdirectory_name>
+   ```
+2. Compile the program:
+   ```sh
+   make
+   ```
+3. Run the program:
+   ```sh
+   ./program_name
+   ```
 
-## 3. How File System Works in Linux
-
-### 3.1. File System Structure
-The Linux File System is organized as a tree structure, with the root directory `/`. Subdirectories and files are arranged hierarchically.
-
-### 3.2. Mounting
-- **Mounting** is the process of attaching a file system to a directory in the system.
-- Example: Mounting a USB drive to `/mnt/usb`:
-  ```bash
-  mount /dev/sdb1 /mnt/usb
-  ```
-
-### 3.3. Inode
-- Every file in Linux is represented by an **inode**.
-- **Inode** contains metadata about the file, such as:
-  - File size.
-  - Access permissions.
-  - Creation and modification timestamps.
-  - Storage location on the disk.
-
----
-
-## 4. Assignments on File Systems
-
-### 4.1. Practical Tasks
-- Write a C program to create a new file and write some text into it.
-- Implement a program to read the contents of a directory and display all file names.
-- Create a symbolic link to an existing file and verify its functionality.
+## References
+- [Linux File System Overview](https://man7.org/linux/man-pages/man7/filesystem.7.html)
+- [File I/O in Linux](https://man7.org/linux/man-pages/man2/open.2.html)
+- [Directory Operations](https://man7.org/linux/man-pages/man3/opendir.3.html)
+- [File Metadata with `stat`](https://man7.org/linux/man-pages/man2/stat.2.html)
+- [Common Linux File Systems](https://wiki.archlinux.org/title/File_systems)
 
 ---
-
-## 5. Other Important Functions
-
-- **`stat()`**: Retrieve file information.
-- **`mkdir()`**: Create a directory.
-- **`rmdir()`**: Remove a directory.
-- **`unlink()`**: Delete a file.
-- **`opendir()` and `readdir()`**: Read directory contents.
-
----
-
-## 6. Common File Systems in Linux
-
-- **ext4**: Default file system for many Linux distributions.
-- **xfs**: High-performance file system for large systems.
-- **btrfs**: Supports snapshots and flexible storage management.
-- **vfat**: Used for USB drives or devices compatible with Windows.
-
----
-
-## 7. Summary
-
-The File System is a critical component in Linux, providing an efficient way to organize and manage data. Understanding and using File System-related functions in C allows developers to manipulate files and directories flexibly and effectively.

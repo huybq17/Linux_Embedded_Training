@@ -1,81 +1,57 @@
 # Socket Programming in Linux
 
 ## Introduction
-This assignment aims to provide hands-on experience with socket programming in Linux. Sockets enable inter-process communication over a network, allowing applications to send and receive data between different machines or within the same system.
+This folder contains a series of exercises designed to provide hands-on experience with socket programming in Linux. Socket programming is a fundamental skill for network communication, enabling processes to exchange data over a network or within the same system. These exercises cover both UNIX domain sockets and Internet domain sockets, using both stream (TCP) and datagram (UDP) protocols.
 
 ## Objectives
 - Understand the fundamentals of socket programming in Linux.
-- Implement a simple client-server model using TCP and UDP sockets.
-- Learn how to establish, send, receive, and close connections using sockets.
+- Learn how to use UNIX domain sockets for inter-process communication on the same machine.
+- Implement client-server communication using Internet domain sockets with both TCP and UDP protocols.
+- Gain experience in handling socket creation, binding, sending, receiving, and closing connections.
 
-## Prerequisites
-Before starting, ensure you have:
-- A Linux-based OS (Ubuntu, Debian, Fedora, etc.).
-- A basic understanding of C/C++ or Python programming.
-- Knowledge of networking concepts (IP, ports, protocols).
+## Exercises Overview
+The folder is organized into subdirectories, each focusing on a specific type of socket communication:
 
-## Assignment Tasks
-### 1. TCP Client-Server Implementation
-- Implement a **TCP server** that:
-  - Listens for incoming connections on a specified port.
-  - Accepts connections from clients.
-  - Receives messages from the client and sends responses.
-  - Handles multiple clients using threads/processes.
+### 1. `unix_dgram`
+- Implements a client-server model using UNIX domain datagram sockets (UDP-like behavior).
+- The server listens for messages from clients and responds to them.
 
-- Implement a **TCP client** that:
-  - Connects to the server on the specified IP and port.
-  - Sends messages to the server and receives responses.
+### 2. `unix_stream`
+- Implements a client-server model using UNIX domain stream sockets (TCP-like behavior).
+- The server accepts connections from clients, exchanges messages.
 
-### 2. UDP Client-Server Implementation
-- Implement a **UDP server** that:
-  - Binds to a specified port.
-  - Listens for incoming datagrams from clients.
-  - Responds to client messages.
+### 3. `inet_dgram`
+- Implements a client-server model using Internet domain datagram sockets (UDP).
+- The server binds to a specified port and listens for incoming datagrams from client, echoing messages back.
 
-- Implement a **UDP client** that:
-  - Sends messages to the server and waits for responses.
+### 4. `inet_stream`
+- Implements a client-server model using Internet domain stream sockets (TCP).
+- The server listens for incoming connections, accepts them, and exchanges messages with client.
 
-### 3. Error Handling & Robustness
-- Implement error handling for socket creation, binding, connection failures, and data transmission.
-- Ensure proper cleanup of sockets before termination.
+## How to Run the Exercises
+Each subdirectory contains a Makefile for running the client and server programs. Follow these steps to compile and run the exercises:
 
-## Sample Code Structure
-```
-├── tcp_server.c
-├── tcp_client.c
-├── udp_server.c
-├── udp_client.c
-├── README.md
-```
 
-## Compilation & Execution
-Compile the programs using `gcc`:
-```sh
-gcc -o tcp_server tcp_server.c
-gcc -o tcp_client tcp_client.c
-```
-Run the server first:
-```sh
-./tcp_server
-```
-Then, run the client in another terminal:
-```sh
-./tcp_client
-```
+### Running the Programs
 
-For UDP, compile similarly and run the server before the client.
+To run the server and client in the each folder:
+1. Compile:
+   ```sh
+   > cd Makefile
+   > make
+   ```
+2. Run the server:
+   ```sh
+   > ./server <port>
+   ```
+3. Run the client:
+   ```sh
+   > ./client <server_ip> <port>
+   ```
 
-## Expected Output
-- The server should start and wait for connections.
-- The client should send a message, and the server should respond accordingly.
-- The communication should continue until the client or server exits.
-
-## Additional Tasks
-- Implement message encryption using OpenSSL.
-- Add logging for debugging purposes.
-- Extend the client to support multiple concurrent connections.
 
 ## References
 - [Beej's Guide to Network Programming](http://beej.us/guide/bgnet/)
 - [Linux Socket Programming](https://man7.org/linux/man-pages/man7/socket.7.html)
+- [UNIX Domain Sockets](https://man7.org/linux/man-pages/man7/unix.7.html)
 

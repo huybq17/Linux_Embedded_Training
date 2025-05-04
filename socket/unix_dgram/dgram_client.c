@@ -7,12 +7,12 @@
 
 #define SERVER_PATH "/tmp/echo_server.sock"
 #define CLIENT_PATH "/tmp/echo_client.sock"
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 1024U
 
 int main() {
     int client_fd;
     struct sockaddr_un client_addr, server_addr;
-    char buffer[BUFFER_SIZE];
+    char buffer[BUFFER_SIZE] = {0};
     ssize_t bytes_received;
 
     unlink(CLIENT_PATH); // Remove the old file
@@ -37,12 +37,12 @@ int main() {
     server_addr.sun_family = AF_UNIX;
     strncpy(server_addr.sun_path, SERVER_PATH, sizeof(server_addr.sun_path) - 1);
 
-    // Nhập dữ liệu từ người dùng
+    // Get the user input
     printf("Enter message to send: ");
     fgets(buffer, BUFFER_SIZE, stdin);
-    buffer[strcspn(buffer, "\n")] = '\0'; // Xoá ký tự newline
+    buffer[strcspn(buffer, "\n")] = '\0'; // Delete newline
 
-    // Gửi đến server
+    // Send to server
     if (sendto(client_fd, buffer, strlen(buffer), 0,
                (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
         perror("sendto");
@@ -50,7 +50,7 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    // Nhận phản hồi từ server
+    // Receive from server
     bytes_received = recvfrom(client_fd, buffer, BUFFER_SIZE - 1, 0, NULL, NULL);
     if (bytes_received < 0) {
         perror("recvfrom");

@@ -13,8 +13,7 @@ int main() {
     struct sockaddr_un server_addr, client_addr;
     char buffer[BUFFER_SIZE];
 
-    unlink(SERVER_PATH); // Xoá file socket cũ
-
+    unlink(SERVER_PATH); // Delete old socket
     server_fd = socket(AF_UNIX, SOCK_DGRAM, 0);
     if (server_fd < 0) {
         perror("socket");
@@ -45,7 +44,7 @@ int main() {
         buffer[received] = '\0';
         printf("Received: %s\n", buffer);
 
-        // Gửi lại chuỗi đã nhận (echo)
+        // Send back the received data (echo)
         if (sendto(server_fd, buffer, received, 0,
                    (struct sockaddr *)&client_addr, client_len) < 0) {
             perror("sendto");
