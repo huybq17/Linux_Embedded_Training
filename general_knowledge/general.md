@@ -1,68 +1,57 @@
 # Static and Shared Libraries
 
+## Introduction
 This document provides an overview of **static libraries** and **shared libraries**, their differences, and how they are used in software development.
 
----
+## Objectives
+- Understand the fundamentals of static and shared libraries.
+- Learn how to create and use static libraries (`.a`) and shared libraries (`.so`) in Linux.
+- Explore the advantages and disadvantages of each type of library.
+- Gain hands-on experience with compiling and linking programs using libraries.
 
-## 1. Static Libraries
+### 1. Static Libraries
+- A **static library** is a collection of object files linked into the program at compile time.
+- Characteristics:
+  - File extension: `.a` (on Linux).
+  - Embedded into the executable during the linking phase.
+  - Larger executable size but no runtime dependency.
+- Advantages:
+  - No runtime dependency on external files.
+  - Easier to distribute as a standalone executable.
+- Disadvantages:
+  - Larger executable size.
+  - Requires recompilation if the library is updated.
 
-### What is a Static Library?
-A **static library** is a collection of object files that are linked into the program at compile time. Once linked, the library becomes part of the executable, and the program does not require the library at runtime.
+### 2. Shared Libraries
+- A **shared library** is a collection of object files loaded into memory and linked at runtime.
+- Characteristics:
+  - File extension: `.so` (on Linux).
+  - Dynamically linked at runtime, reducing executable size.
+  - Requires the library to be present on the system at runtime.
+- Advantages:
+  - Smaller executable size.
+  - Easier to update: Updating the library updates all dependent programs.
+  - Shared memory usage across multiple programs.
+- Disadvantages:
+  - Dependency on external files at runtime.
+  - Potential compatibility issues if the library is updated improperly.
 
-### Characteristics:
-- File extension: `.a` (on Linux).
-- The library is embedded into the executable during the linking phase.
-- The resulting executable is self-contained and does not depend on the library at runtime.
-- Larger executable size since the library code is included in the binary.
-- Faster execution because no runtime linking is required.
+## Running the Programs
+1. Navigate to the desired subdirectory:
+   ```sh
+   cd <subdirectory_name>
+   ```
+2. Compile the program:
+   ```sh
+   make
+   ```
+3. Run the program:
+   ```sh
+   ./program
+   ```
 
-### Advantages:
-- No dependency on external files at runtime.
-- Easier to distribute as a standalone executable.
-
-### Disadvantages:
-- Larger executable size.
-- If the library is updated, the program must be recompiled to include the changes.
-
----
-
-## 2. Shared Libraries
-
-### What is a Shared Library?
-A **shared library** is a collection of object files that are loaded into memory and linked to the program at runtime. The library code is shared among multiple programs, reducing memory usage and disk space.
-
-### Characteristics:
-- File extension: `.so` (on Linux).
-- The library is not embedded into the executable; instead, it is dynamically linked at runtime.
-- Smaller executable size since the library code is not included in the binary.
-- Requires the library to be present on the system at runtime.
-
-### Advantages:
-- Smaller executable size.
-- Easier to update: Updating the library automatically updates all programs that use it.
-- Shared memory usage: Multiple programs can use the same library in memory.
-
-### Disadvantages:
-- Dependency on external files at runtime.
-- Potential compatibility issues if the library is updated improperly.
-
----
-
-## 3. Key Differences Between Static and Shared Libraries
-
-| Feature                | Static Library (`.a`)       | Shared Library (`.so`)       |
-|------------------------|-----------------------------|------------------------------|
-| Linking Time           | Compile time               | Runtime                      |
-| Executable Size        | Larger                     | Smaller                      |
-| Runtime Dependency     | None                       | Requires library at runtime  |
-| Update Process         | Requires recompilation     | No recompilation needed      |
-| Memory Usage           | Separate copy for each app | Shared across apps           |
-
----
-
-## 4. How to Create and Use Libraries
-
-### Creating a Static Library
-1. Compile source files into object files:
-   ```bash
-   gcc -c file1.c file2.c
+## References
+- [Static Libraries in Linux](https://tldp.org/HOWTO/Program-Library-HOWTO/static-libraries.html)
+- [Shared Libraries in Linux](https://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html)
+- [GCC Documentation](https://gcc.gnu.org/onlinedocs/)
+- [Linux Programmer's Manual](https://man7.org/linux/man-pages/)
