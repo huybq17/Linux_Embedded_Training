@@ -6,16 +6,19 @@
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include "inc/server.h"
+#include "server.h"
+#include "server_sock.h"
+#include "peer_sock.h"
+#include "common.h"
 
-#define DEFAULT_PORT 12345U      // Default port if not specified
+// Default port if not specified
+#define DEFAULT_PORT 12345U
 
 int main(int argc, char *argv[]) {
     int server_fd;
     struct sockaddr_in server_addr;
-    char input[50];
+    char input[MAX_BUFFER_SIZE];
     int port = DEFAULT_PORT;
-    pthread_t server_tid;
     int ret;
 
     if (argc != 2) {
@@ -29,17 +32,18 @@ int main(int argc, char *argv[]) {
     
 
     // TODO: init_socket
-    start_app(port);
+    start_app(&port);
 
     while (1) {
         printf("> ");
         fflush(stdin);
-        fgets(input, sizeof(input), stdin);
+        if (fgets(input, sizeof(input), stdin) == NULL) {
+            perror("fgets");
+            continue;
+        }
 
-        // TODO: handle input
-        pthread_join(server_tid, NULL);
+        cli_cmd_init(input);
+
     }
-
-
 
 }

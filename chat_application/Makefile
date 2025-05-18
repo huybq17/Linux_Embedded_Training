@@ -34,8 +34,6 @@ $(OBJ_DIR)/%.o: %.c
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(shell dirname $@)
 	$(CC) $(C_FLAGS) $@ $< -I $(INC_DIR)
-# @echo $(SRCS) 
-# @echo $(OBJS)
 
 # Clean generated files
 clean:

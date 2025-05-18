@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 // Function to initialize the server socket
-void start_app(int port);
+void start_app(int *port);
 
 void *server_handle(void *arg); 
 
