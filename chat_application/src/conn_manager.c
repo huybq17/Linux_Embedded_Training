@@ -12,7 +12,7 @@
 
 conn_info_t conn_list[MAX_CONNECTIONS];
 static int num_peers = 0;
-static int next_peer_id = 1;
+static int next_peer_id = 0;
 
 
 int add_connection(int peer_sock, const char* ip, int port) {
@@ -32,13 +32,13 @@ int add_connection(int peer_sock, const char* ip, int port) {
         }
     }
 
-    // Add the new connection to the list
-    conn_info.id = next_peer_id++;
+    conn_info.id = next_peer_id;
     conn_info.sockfd = peer_sock;
     strncpy(conn_info.ip, ip, INET_ADDRSTRLEN);
     conn_info.port = port;
 
     conn_list[num_peers++] = conn_info;
+    next_peer_id++;
 
     return conn_info.id;
 }
@@ -49,7 +49,6 @@ int remove_connection(int conn_id) {
     // Find the connection with the specified ID
     for (i = 0; i < num_peers; i++) {
         if (conn_list[i].id == conn_id) {
-            // Close the socket and remove the connection from the list
             close(conn_list[i].sockfd);
             memmove(&conn_list[i], &conn_list[i + 1], (num_peers - i - 1) * sizeof(conn_info_t));
             num_peers--;
@@ -71,15 +70,32 @@ conn_info_t* get_connection(int conn_id) {
         }
     }
 
-    printf("Connection with ID %d not found.\n", conn_id);
     return NULL;
 }
 
 void print_connection_list() {
     int i;
 
-    printf("Current connections:\n");
+    printf("\n============== CONNECTIONS LIST ===========\r\n\n");
+    printf("ID   IP            Port\r\n");
+    printf("---- ------------- ----\r\n");
     for (i = 0; i < num_peers; i++) {
-        printf("ID: %d, IP: %s, Port: %d\n", conn_list[i].id, conn_list[i].ip, conn_list[i].port);
+        printf("%-4d %-13s %4d\n", conn_list[i].id, conn_list[i].ip, conn_list[i].port);
     }
+    printf("\n============================================\r\n");
+}
+
+int terminate_connection(int conn_id) {
+    conn_info_t *conn_info;
+
+    conn_info = get_connection(conn_id);
+    if (conn_info == NULL) {
+        printf("Connection with ID %d not found.\r\n", conn_id);
+        return -1;
+    }
+
+    close(conn_info->sockfd);
+    remove_connection(conn_id);
+
+    return 0;
 }

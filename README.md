@@ -32,6 +32,9 @@ Below is an overview of the folders and their respective topics:
 - Work with Linux file systems to create, read, write, and manage files and directories.
 - Topics include file I/O operations, directory management, symbolic links, and file metadata.
 
+### 7. [Chat Application](./chat_application)
+- A chat application using socket programming on Linux.
+
 ## How to Use This Project
 1. Navigate to the folder of the topic you want to explore.
 2. Follow the instructions in the folder's `README.md` file to compile and run the exercises.

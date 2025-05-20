@@ -3,11 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Function to initialize the server socket
+
+/**************************************************************************//**
+ * @brief Start the chat application server
+ *
+ * @param port Pointer to the port number
+ *
+ *****************************************************************************/
 void start_app(int *port);
 
-void *server_handle(void *arg); 
-
-void *peer_handle(void *arg);
 
 #endif /* _SERVER_H_ */

@@ -9,7 +9,7 @@ BIN_DIR := $(CUR_DIR)/bin
 OBJ_DIR := $(CUR_DIR)/obj
 
 CC := gcc
-C_FLAGS := -c -fPIC -O2 -o
+C_FLAGS := -c -fPIC -O2 -g -o
 
 SRCS = $(wildcard $(SRC_DIR)/*.c) \
 	   $(wildcard $(CUR_DIR)/*.c)
