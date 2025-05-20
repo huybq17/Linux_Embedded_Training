@@ -1,0 +1,15 @@
+==101082== Memcheck, a memory error detector
+==101082== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==101082== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==101082== Command: ./bin/chat
+==101082== 
+Usage: ./bin/chat <port>
+==101082== 
+==101082== HEAP SUMMARY:
+==101082==     in use at exit: 0 bytes in 0 blocks
+==101082==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==101082== 
+==101082== All heap blocks were freed -- no leaks are possible
+==101082== 
+==101082== For lists of detected and suppressed errors, rerun with: -s
+==101082== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
